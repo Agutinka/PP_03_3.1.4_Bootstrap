@@ -1,0 +1,42 @@
+body {
+    margin: 0; /* Убираем отступы по умолчанию для body */
+}
+
+.container {
+    width: 100%;
+    background-color: #f0f0f0; /* Цвет фона - темно-серый */
+    color: #fff; /* Цвет текста - белый */
+    padding: 20px 30px 30px 20px; /* Внутренние отступы */
+    box-sizing: border-box; /* Учитываем внутренние отступы в общей ширине элемента */
+    display: flex;
+    justify-content: space-between; /* Распределение элементов по горизонтали */
+    align-items: center; /* Выравнивание по вертикали */
+}
+
+.navbar {
+    width: 100%;
+    padding-left: 20px;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.navbar-brand span {
+    margin-right: 5px; /* Расстояние между элементами */
+
+}
+
+.navbar-brand span:first-child {
+    font-weight: bold; /* Первый span (имя пользователя) жирным шрифтом */
+}
+
+button {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding-right: 20px;
+}

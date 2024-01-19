@@ -1,0 +1,218 @@
+<!-- Пример адаптированного файла HTML -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Подключение библиотек и стилей -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"/>
+    <title>Admin panel</title>
+</head>
+
+<body>
+<div class="container-fluid">
+    <!-- Шапка -->
+    <div class="header">
+        <!-- Див с элементами "name", "with roles" и "role" -->
+        <div class="user-info">
+            <div th:text="${currentUser.username}">name</div>
+            <div>with roles:</div>
+            <div th:each="role : ${currentUser.roles}" th:text="${role.getName().replace('ROLE_', '') + ' '}">role</div>
+        </div>
+
+        <!-- Див с кнопкой "Logout" -->
+        <div class="logout-button">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Навигация по ролям -->
+    <div class="roles-navigation">
+        <ul>
+            <li><a href="/admin">Admin</a></li>
+            <li><a href="/user">User</a></li>
+        </ul>
+    </div>
+
+    <!-- Заголовок и таблица -->
+    <div class="content">
+        <h1>Admin Panel</h1>
+        <!-- Вкладки -->
+        <ul class="nav nav-tabs" id="myTabs">
+            <li class="nav-item">
+                <a class="nav-link active" id="usersTab" data-bs-toggle="pill" href="#usersTable">Users Table</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="newUserTab" data-bs-toggle="pill" href="#newUser">New User</a>
+            </li>
+        </ul>
+    </div>
+    <!-- Содержимое вкладок -->
+    <div class="tab-content">
+        <!-- Вкладка Users Table -->
+        <div class="tab-pane fade show active" id="usersTable">
+            <h2>All users</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Age</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${usersList}">
+                    <td th:text="${user.getId()}"></td>
+                    <td th:text="${user.getUsername()}"></td>
+                    <td th:text="${user.getSecondname()}"></td>
+                    <td th:text="${user.getAge()}"></td>
+                    <td th:text="${user.getEmail()}"></td>
+                    <td>
+                        <ul th:each="role:${user.getRoles()}">
+                            <li th:text="${role.getName().replace('ROLE_', '') + ' '}"></li>
+                        </ul>
+                    </td>
+                    <td class="edit">
+                        <a th:href="@{/admin/edit(id=${user.getId()})}" class="edit-link">
+                            <input type="hidden" name="id" th:value="${user.getId()}"/>
+                            <input class="btn btn-primary" type="submit" value="Edit"/>
+                        </a>
+                    </td>
+                    <td class="delete">
+                        <form th:method="post" th:action="@{/admin/delete(id=${user.getId()})}" class="delete-form">
+                            <input type="hidden" name="id" th:value="${user.getId()}"/>
+                            <input class="btn btn-danger" type="submit" value="Delete"/>
+                        </form>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+
+        <!-- Вкладка New User -->
+        <div class="tab-pane fade" id="newUser">
+            <h2>Add new user</h2>
+            <form th:method="post" th:action="@{/admin/create}" th:object="${user}" class="form">
+                <div class="mb-3">
+                    <label for="username" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="username" name="username" th:field="*{username}"
+                           required/>
+                </div>
+                <div class="mb-3">
+                    <label for="secondname" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="secondname" name="secondname" th:field="*{secondname}"
+                           required/>
+                </div>
+                <div class="mb-3">
+                    <label for="age" class="form-label">Age</label>
+                    <input type="number" class="form-control" id="age" name="age" th:field="*{age}" required/>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" th:field="*{email}" required/>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" th:field="*{password}"
+                           required/>
+                </div>
+                <div class="mb-3">
+                    <label for="role" class="form-label">Role</label>
+                    <select class="form-select" id="role" name="role" th:field="*{role}" required>
+                        <option value="Admin">Admin</option>
+                        <option value="User">User</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Add new user</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно Edit user -->
+<div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true"
+     data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editUserModalLabel">Edit user</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Форма редактирования пользователя -->
+                <form th:method="post" th:action="@{/admin/edit(id=${user.getId()})}" th:object="${user}">
+                    <!-- ... (Поля редактирования) -->
+                    <div class="mb-3">
+                        <label for="user_id" class="form-label">ID</label>
+                        <input type="text" class="form-control" id="user_id" name="user_id" value="1" readonly/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="username" name="username"
+                               th:value="${user.getUsername()}"/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="secondname" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="secondname" name="secondname"
+                               th:value="${user.getSecondname()}"/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="age" class="form-label">Age</label>
+                        <input type="number" class="form-control" id="age" name="age" th:value="${user.getAge()}"/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" th:value="${user.getEmail()}"/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" th:value="${user.getPassword()}"/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="role" class="form-label">Role</label>
+                        <select class="form-select" id="role" name="role" th:value="${user.getRole()}">
+                            <option value="Admin">Admin</option>
+                            <option value="User">User</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Edit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Находим модальное окно
+        var editUserModal = new bootstrap.Modal(document.getElementById("editUserModal"));
+
+        // Добавляем слушатель событий на кнопку "Edit"
+        document.querySelector(".table").addEventListener("click", function (event) {
+            if (event.target.classList.contains("btn-primary")) {
+                // Открываем модальное окно при нажатии на кнопку "Edit"
+                editUserModal.show();
+            }
+        });
+    });
+</script>
+
+
+<!-- отдельные JS для Popper и Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+        integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
+        crossorigin="anonymous"></script>
+</body>
+</html>
