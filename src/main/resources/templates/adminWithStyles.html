@@ -100,31 +100,31 @@
             <h2>Add new user</h2>
             <form th:method="post" th:action="@{/admin/create}" th:object="${user}" class="form">
                 <div class="mb-3">
-                    <label for="username" class="form-label">First Name</label>
-                    <input type="text" class="form-control" id="username" name="username" th:field="*{username}"
+                    <label for="username1" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="username1" name="username" th:field="*{username}"
                            required/>
                 </div>
                 <div class="mb-3">
-                    <label for="secondname" class="form-label">Last Name</label>
-                    <input type="text" class="form-control" id="secondname" name="secondname" th:field="*{secondname}"
+                    <label for="secondname1" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="secondname1" name="secondname" th:field="*{secondname}"
                            required/>
                 </div>
                 <div class="mb-3">
-                    <label for="age" class="form-label">Age</label>
-                    <input type="number" class="form-control" id="age" name="age" th:field="*{age}" required/>
+                    <label for="age1" class="form-label">Age</label>
+                    <input type="number" class="form-control" id="age1" name="age" th:field="*{age}" required/>
                 </div>
                 <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" th:field="*{email}" required/>
+                    <label for="email1" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email1" name="email" th:field="*{email}" required/>
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" th:field="*{password}"
+                    <label for="password1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password1" name="password" th:field="*{password}"
                            required/>
                 </div>
                 <div class="mb-3">
-                    <label for="role" class="form-label">Role</label>
-                    <select class="form-select" id="role" name="role" th:field="*{role}" required>
+                    <label for="role1" class="form-label">Role</label>
+                    <select class="form-select" id="role1" name="role" th:field="*{role}" required>
                         <option value="Admin">Admin</option>
                         <option value="User">User</option>
                     </select>
