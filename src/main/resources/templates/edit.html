@@ -1,46 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit</title>
-</head>
-<body>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
 
-<h1> Редактировать пользователя </h1>
-<form th:method="post" th:action="@{/admin/edit(id=${user.getId()})}" th:object="${user}">
+<!--    <title>Edit</title>-->
 
-    <label for="username"> Введите имя:  </label>
-    <input type="text" id="username" name="username" th:field="*{username}"/>
+<!--</head>-->
+<!--<body>-->
 
-    <label for="secondname"> Введите фамилию: </label>
-    <input type="text" id="secondname" name="secondname" th:field="*{secondname}"/>
+<!--<h4> Edit user </h4>-->
+<!--<form th:method="post" th:action="@{/admin/edit(id=${user.getId()})}" th:object="${user}">-->
 
-    <label for="password"> Введите пароль: </label>
-    <input type="text" id="password" name="password" th:field="*{password}"/>
+<!--    <label for="username"> First Name  </label>-->
+<!--    <input type="text" id="username" name="username" th:field="*{username}"/>-->
 
-    <label for="age"> Введите возраст: </label>
-    <input type="text" id="age" name="age" th:field="*{age}"/>
+<!--    <label for="secondname"> Last Name </label>-->
+<!--    <input type="text" id="secondname" name="secondname" th:field="*{secondname}"/>-->
 
-    <label for="email"> Введите электронную почту: </label>
-    <input type="text" id="email" name="email" th:field="*{email}"/>
-    <br/>
-    <label>Назначить роль:
-        <input type="checkbox" name="roles"
-               th:each="roles : ${role}"
-               th:value="${roles.getId()}"
-               th:text="${roles.getName().replace('ROLE_', '') + ' '}"
-               th:field="*{roles}"
-        />
-    </label>
-    <br>
+<!--    <label for="age"> Age </label>-->
+<!--    <input type="text" id="age" name="age" th:field="*{age}"/>-->
 
-    <br/>
-    <input type="submit" value="update"/>
-</form>
-<form th:action="@{/logout}" method="post">
-    <button type="submit">Log out</button>
-</form>
+<!--    <label for="email"> Email </label>-->
+<!--    <input type="text" id="email" name="email" th:field="*{email}"/>-->
 
-</body>
-</html>
+<!--    <label for="password"> Password </label>-->
+<!--    <input type="text" id="password" name="password" th:field="*{password}"/>-->
+
+<!--    <label>Role-->
+<!--        <input type="checkbox" name="roles"-->
+<!--               th:each="roles : ${role}"-->
+<!--               th:value="${roles.getId()}"-->
+<!--               th:text="${roles.getName().replace('ROLE_', '') + ' '}"-->
+<!--               th:field="*{roles}"-->
+<!--        />-->
+<!--    </label>-->
+<!--    <br>-->
+
+<!--    <br/>-->
+<!--    <input type="submit" value="edit"/>-->
+<!--</form>-->
+
+
+<!--</body>-->
+<!--</html>-->

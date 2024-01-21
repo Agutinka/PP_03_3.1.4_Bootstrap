@@ -39,13 +39,6 @@ public class AdminController {
         return "admin";
     }
 
-    @PostMapping("/create")
-    public String addUser(@ModelAttribute(value = "user") User user) {
-        userService.save(user);
-
-        return "redirect:/admin";
-    }
-
     @GetMapping("/create")
     public String create(ModelMap modelMap) {
         modelMap.addAttribute("user", new User());
@@ -53,25 +46,12 @@ public class AdminController {
         return "create";
     }
 
-//@GetMapping("/create")
-//public String create(Model model, Principal principal) {
-//    String currentUserEmail = principal.getName();
-//    User currentUser = userService.findUserByUsername(currentUserEmail);
-//
-//    model.addAttribute("currentUser", currentUser);
-//    model.addAttribute("user", new User());
-//    model.addAttribute("role", roleService.getAllUser());
-//
-//    return "create";
-//}
-//
-//
-//    @PostMapping("/create")
-//    public String addUser(@ModelAttribute("userForm") User userForm) {
-//        userService.save(userForm);
-//
-//        return "redirect:/admin";
-//    }
+    @PostMapping("/create")
+    public String addUser(@ModelAttribute(value = "user") User user) {
+        userService.save(user);
+
+        return "redirect:/admin";
+    }
 
     @GetMapping("/edit")
     public String edit(@RequestParam(value = "id", required = false) Long id, Model model) {
