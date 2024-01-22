@@ -89,12 +89,12 @@
 
         <div class="create-form-group">
             <label for="password">Password</label>
-            <input type="text" id="password" name="password" th:field="*{password}" class="form-control"/>
+            <input type="password" id="password" name="password" th:field="*{password}" class="form-control"/>
         </div>
 
         <div class="create-form-group role-group">
             <label for="roleSelect">Role</label>
-            <select class="form-control selectpicker" id="roleSelect" name="roles" multiple data-live-search="true">
+            <select class="form-control" id="roleSelect" name="roles" multiple data-live-search="true">
                 <option th:each="role : ${role}" th:value="${role.getId()}" th:text="${role.getName().replace('ROLE_', '')}"></option>
             </select>
         </div>

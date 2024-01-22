@@ -119,7 +119,6 @@
 
             <!-- Tab Content -->
             <div class="tab-content mt-3">
-
                 <!-- Users Table Tab -->
                 <div class="tab-pane fade show active" id="users">
                     <h3>All users</h3>
@@ -150,21 +149,23 @@
                                     <td th:text="${user.getAge()}"></td>
                                     <td th:text="${user.getEmail()}"></td>
                                     <td>
-                                        <ul th:each="role:${user.getRoles()}">
-                                            <li th:text="${role.getName().replace('ROLE_', '') + ' '}"></li>
-                                        </ul>
+                                        <span th:each="role, iterStat : ${user.getRoles()}">
+                                            <span th:text="${role.getName().replace('ROLE_', '')}"></span>
+                                            <span th:if="${!iterStat.last}"> </span>
+                                        </span>
                                     </td>
+
 
                                     <!-- Кнопка Edit -->
                                     <td>
                                         <!-- Ссылка для открытия модального окна редактирования -->
-                                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                data-target="#editModal"
-                                                data-user-id="${user.getId()}">
+                                        <button type="button" class="btn btn-primary"
+                                                th:attr="data-user-id=${user.getId()}, data-toggle='modal', data-target='#editModal' + ${user.getId()}">
                                             Edit
                                         </button>
                                         <!-- Модальное окно для редактирования -->
-                                        <div class="modal fade" id="editModal" tabindex="-1" role="dialog"
+                                        <div class="modal fade" th:id="'editModal' + ${user.getId()}" tabindex="-1"
+                                             role="dialog"
                                              aria-labelledby="editModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
@@ -217,17 +218,14 @@
                                                                        name="password">
                                                             </div>
 
-                                                            <div class="form-group role-group">
+                                                            <div class="form-group">
                                                                 <label for="role1">Role</label>
-                                                                <select class="form-control" id="role1" name="roles"
-                                                                        multiple data-live-search="true"
-                                                                        style="min-width: 200px;">
-                                                                    <option th:each="role : ${roles}"
-                                                                            th:value="${role.getId()}"
-                                                                            th:text="${role.getName().replace('ROLE_', '')}"
-                                                                            th:selected="${user.getRoles().contains(role)}"
-                                                                            th:field="${user.roles}"></option>
+                                                                <select class="form-control" id="role1" name="roles" multiple data-live-search="true" style="min-width: 200px;">
+                                                                    <option th:each="roles : ${role}" th:value="${roles.getId()}" th:field="${user.roles}">
+                                                                        <span th:text="${roles.getName().replace('ROLE_', '')}" style="color: #FFA500;"></span>
+                                                                    </option>
                                                                 </select>
+
                                                             </div>
 
                                                         </div>
@@ -354,7 +352,6 @@
                 $("#createFormContainer").html(data);
             }
         });
-        // $('.selectpicker').selectpicker();
     });
 
 </script>
