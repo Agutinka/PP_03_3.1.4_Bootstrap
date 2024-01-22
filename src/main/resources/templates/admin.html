@@ -220,11 +220,16 @@
 
                                                             <div class="form-group">
                                                                 <label for="role1">Role</label>
-                                                                <select class="form-control" id="role1" name="roles" multiple data-live-search="true" style="min-width: 200px;">
-                                                                    <option th:each="roles : ${role}" th:value="${roles.getId()}" th:field="${user.roles}">
-                                                                        <span th:text="${roles.getName().replace('ROLE_', '')}" style="color: #FFA500;"></span>
-                                                                    </option>
-                                                                </select>
+
+                                                                <input type="text" class="form-control" id="role1"
+                                                                       th:each="roles : ${user.getRoles()}"
+                                                                       th:value="${roles.getName().replace('ROLE_', ' ')}"
+                                                                name="role">
+
+<!--                                                                <select class="form-control" id="role1" name="roles" multiple data-live-search="true">-->
+<!--                                                                    <option th:each="roles : ${user.getRoles()}"-->
+<!--                                                                            th:value="${roles.getName().replace('ROLE_', ' ')}"></option>-->
+<!--                                                                </select>-->
 
                                                             </div>
 
