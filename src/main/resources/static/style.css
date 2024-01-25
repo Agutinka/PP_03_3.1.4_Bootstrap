@@ -1,0 +1,150 @@
+/* Новые стили для верхней части контейнера */
+.custom-top-bar {
+    background-color: #343a40 !important; /* Тёмно-серый цвет */
+    color: white;
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.custom-top-bar .logout-btn {
+    margin-right: 30px; /* Отступ справа */
+}
+
+/* Дополнительные стили для текста и ролей */
+.custom-top-bar span.font-weight-bold {
+    font-size: 18px;
+}
+
+.custom-top-bar span.roles {
+    font-style: italic;
+    margin-left: 10px;
+}
+
+/* Дополнительные стили для кнопки Logout */
+.custom-top-bar .logout-btn button {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/*  Стили для окна создания нового пользователя*/
+
+h3 {
+    margin-top: -35px;
+}
+
+.form-container {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+
+    text-align: center;
+    margin: 0;
+}
+
+.form-group label {
+    font-weight: bold;
+    align-items: center;
+    margin: 0;
+}
+
+.form-group input[type="text"] {
+
+    background-color: rgba(255, 165, 0, 0.2); /* Прозрачный оранжевый фон */
+}
+
+.form-group input#age,
+.form-group input#password {
+    background-color: #fff; /* Белый фон для полей Age и Password */
+}
+
+.form-group.role-group {
+    margin-top: 0;
+}
+
+.form-group.role-group select {
+    max-height: 4em; /* Задайте желаемую максимальную высоту */
+}
+
+.btn-success {
+    width: 50%;
+    margin: auto;
+}
+
+/* Стили для окна User */
+
+/* Стили для заголовка таблицы */
+.table-title {
+    font-size: 24px;
+    font-weight: bold;
+    background-color: #f8f9fa; /* Светло-серый цвет */
+    color: #343a40; /* Тёмно-серый цвет текста */
+    padding: 10px;
+    margin-top: 20px;
+}
+
+/* Стили для контейнера таблицы */
+.table-container {
+    margin-right: 10vw;
+}
+
+/* Общие стили для таблицы */
+.table th, .table td {
+    text-align: center;
+}
+
+/* Убираем внутренние отступы в ячейках таблицы */
+.table th, .table td {
+    padding: 0.75rem;
+}
+
+/* Делаем ширину таблицы 100% от родительского контейнера */
+.table {
+    width: 100%;
+}
+
+
+/* Общие стили для модальных окон */
+.modal-content {
+    width: 100%; /* Ширина модального окна */
+}
+
+.form-group input[type="text"] {
+    background-color: transparent; /* Прозрачный оранжевый фон */
+}
+
+/* Стили для формы внутри модального окна */
+.form-group {
+    width: 40%; /* Ширина input и select */
+    margin: 0 auto; /* Центрирование формы внутри модального окна */
+}
+
+/* Стили для input внутри формы */
+.form-group input {
+    height: 30px; /* Фиксированная высота input */
+    margin-bottom: 5px; /* Отступ 5px снизу */
+}
+
+/* Стили для select внутри формы */
+.form-group select {
+    height: 45px; /* Фиксированная высота select */
+}
+
+
+

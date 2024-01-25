@@ -5,11 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Мой новый файл стилей -->
-    <link rel="stylesheet" href="/style.css">
-
     <title>Добавить нового пользователя</title>
+    <style>
+        h3 {
+            margin-top: -35px;
+        }
 
+        .form-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+
+        .create-form-group {
+            width: 150%;
+            text-align: center;
+            margin: 0;
+        }
+
+        .create-form-group label {
+            font-weight: bold;
+            align-items: center;
+        }
+
+        .create-form-group input[type="text"] {
+            background-color: rgba(255, 165, 0, 0.2); /* Прозрачный оранжевый фон */
+        }
+
+        .create-form-group input#age,
+        .create-form-group input#password {
+            background-color: #fff; /* Белый фон для полей Age и Password */
+        }
+
+        #roleSelect {
+            height: 4em;
+        }
+
+        .create-form-group.role-group {
+            margin-bottom: 10px;
+        }
+
+        .btn-success {
+            width: 50%;
+            margin: auto;
+        }
+    </style>
 </head>
 <body>
 <h3>Add new user</h3>
@@ -17,39 +67,39 @@
 <div class="form">
 <form action="#" method="POST" th:action="@{/admin/create}" th:object="${user}">
     <div class="form-container">
-        <div class="form-group">
+        <div class="create-form-group">
             <label for="username">First name</label>
             <input type="text" id="username" name="username" th:field="*{username}" class="form-control"/>
         </div>
 
-        <div class="form-group">
+        <div class="create-form-group">
             <label for="secondname">Last name</label>
             <input type="text" id="secondname" name="secondname" th:field="*{secondname}" class="form-control"/>
         </div>
 
-        <div class="form-group">
+        <div class="create-form-group">
             <label for="age">Age</label>
             <input type="text" id="age" name="age" th:field="*{age}" class="form-control"/>
         </div>
 
-        <div class="form-group">
+        <div class="create-form-group">
             <label for="email">Email</label>
             <input type="text" id="email" name="email" th:field="*{email}" class="form-control"/>
         </div>
 
-        <div class="form-group">
+        <div class="create-form-group">
             <label for="password">Password</label>
             <input type="password" id="password" name="password" th:field="*{password}" class="form-control"/>
         </div>
 
-        <div class="form-group role-group">
+        <div class="create-form-group role-group">
             <label for="roleSelect">Role</label>
             <select class="form-control" id="roleSelect" name="roles" multiple data-live-search="true">
                 <option th:each="roles : ${role}" th:value="${roles.getId()}" th:text="${roles.getName().replace('ROLE_', '')}"></option>
             </select>
         </div>
 
-        <div class="form-group role-group">
+        <div class="create-form-group role-group">
             <button type="submit" class="btn btn-success">Add new user</button>
         </div>
     </div>
