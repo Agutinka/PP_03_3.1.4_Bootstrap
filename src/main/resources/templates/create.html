@@ -12,48 +12,58 @@
 
 </head>
 <body>
-<h3>Add new user</h3>
-<!-- New User Tab -->
-<div class="form">
-<form action="#" method="POST" th:action="@{/admin/create}" th:object="${user}">
-    <div class="form-container">
-        <div class="form-group">
-            <label for="username">First name</label>
-            <input type="text" id="username" name="username" th:field="*{username}" class="form-control"/>
-        </div>
+<!-- Tab Content -->
+<div class="tab-content mt-3">
+    <!-- New User Tab -->
 
-        <div class="form-group">
-            <label for="secondname">Last name</label>
-            <input type="text" id="secondname" name="secondname" th:field="*{secondname}" class="form-control"/>
-        </div>
+    <h4>Add new user</h4>
+    <div id="createFormContainer">
+        <div class="form">
+            <form action="#" method="POST" th:action="@{/admin/create}" th:object="${user}">
+                <div class="form-container">
+                    <div class="form-group">
+                        <label for="username">First name</label>
+                        <input type="text" id="username" name="username" th:field="*{username}"
+                               class="form-control"/>
+                    </div>
 
-        <div class="form-group">
-            <label for="age">Age</label>
-            <input type="text" id="age" name="age" th:field="*{age}" class="form-control"/>
-        </div>
+                    <div class="form-group">
+                        <label for="secondname">Last name</label>
+                        <input type="text" id="secondname" name="secondname" th:field="*{secondname}"
+                               class="form-control"/>
+                    </div>
 
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="text" id="email" name="email" th:field="*{email}" class="form-control"/>
-        </div>
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="text" id="age" name="age" th:field="*{age}" class="form-control"/>
+                    </div>
 
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" th:field="*{password}" class="form-control"/>
-        </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" id="email" name="email" th:field="*{email}" class="form-control"/>
+                    </div>
 
-        <div class="form-group role-group">
-            <label for="roleSelect">Role</label>
-            <select class="form-control" id="roleSelect" name="roles" multiple data-live-search="true">
-                <option th:each="roles : ${role}" th:value="${roles.getId()}" th:text="${roles.getName().replace('ROLE_', '')}"></option>
-            </select>
-        </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" th:field="*{password}"
+                               class="form-control"/>
+                    </div>
 
-        <div class="form-group role-group">
-            <button type="submit" class="btn btn-success">Add new user</button>
+                    <div class="form-group role-group">
+                        <label for="roleSelect">Role</label>
+                        <select class="form-control" id="roleSelect" name="roles" multiple data-live-search="true">
+                            <option th:each="roles : ${role}" th:value="${roles.getId()}"
+                                    th:text="${roles.getName().replace('ROLE_', '')}"></option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Add new user</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-</form>
 </div>
 
 <!-- Bootstrap JS -->
