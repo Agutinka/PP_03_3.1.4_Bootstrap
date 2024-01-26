@@ -61,9 +61,10 @@
                                readonly th:value="${user.getPassword()}">
                     </div>
 
-                    <div class="form-group">
-                        <label for="role"><strong>Role</strong></label>
-                        <input type="text" class="form-control" id="role" readonly
+                    <div class="form-group role-group">
+                        <label for="roleSelect"><strong>Role</strong></label>
+
+                        <input type="text" class="form-control" id="roleSelect" readonly
                                th:each="role : ${user.getRoles()}"
                                th:value="${role.getName().replace('ROLE_', ' ')}">
                     </div>

@@ -93,7 +93,7 @@ label {
 }
 
 .form-container select.form-control {
-    height: 4rem; 
+    height: 4rem;
 }
 
 .form-container button {
@@ -146,10 +146,6 @@ label {
     width: 100%; /* Ширина модального окна */
 }
 
-.form-group input[type="text"] {
-    background-color: transparent;
-}
-
 /* Стили для формы внутри модального окна */
 .modal-body .form-group {
     width: 40%; /* Ширина input и select */
@@ -163,8 +159,8 @@ label {
 }
 
 /* Стили для select внутри формы */
-.modal-body .form-group select {
-    height: 45px; /* Фиксированная высота select */
+.modal-body select.form-control {
+    height: 4rem;
 }
 
 

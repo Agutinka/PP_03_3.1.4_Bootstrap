@@ -65,16 +65,19 @@
                         </div>
 
                         <div class="form-group role-group">
-                            <label for="roleSelect">Role</label>
+                            <label th:for="roleSelect">Role</label>
                             <select class="form-control" id="roleSelect" name="roles" multiple data-live-search="true">
-                                <option th:each="roles : ${role}" th:value="${roles.getId()}" th:text="${roles.getName().replace('ROLE_', '')}"
-                                        th:selected="${user.getRoles().contains(role)}"></option>
+                                <option th:each="role : ${user.getRoles()}"
+                                        th:text="${role.getName().replace('ROLE_', ' ')}"
+                                        th:value="${role.getId()}"></option>
                             </select>
                         </div>
                         <br>
                         <div class="modal-footer">
                             <!-- Кнопки для закрытия или сохранения данных -->
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Close</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">
+                                Close
+                            </button>
                             <button type="submit" class="btn btn-primary">Edit</button>
                         </div>
                     </form>
