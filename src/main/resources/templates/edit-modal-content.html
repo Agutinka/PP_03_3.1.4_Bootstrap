@@ -65,11 +65,13 @@
                         </div>
 
                         <div class="form-group role-group">
-                            <label th:for="roleSelect">Role</label>
+                            <label for="roleSelect">Role</label>
+
                             <select class="form-control" id="roleSelect" name="roles" multiple data-live-search="true">
                                 <option th:each="role : ${user.getRoles()}"
-                                        th:text="${role.getName().replace('ROLE_', ' ')}"
-                                        th:value="${role.getId()}"></option>
+                                        th:value="${role.getId()}"
+                                        th:text="${role.getName().replace('ROLE_', ' ')}">
+                                </option>
                             </select>
                         </div>
                         <br>

@@ -64,10 +64,14 @@
                     <div class="form-group role-group">
                         <label for="roleSelect"><strong>Role</strong></label>
 
-                        <input type="text" class="form-control" id="roleSelect" readonly
-                               th:each="role : ${user.getRoles()}"
-                               th:value="${role.getName().replace('ROLE_', ' ')}">
+                        <select class="form-control" id="roleSelect" multiple disabled>
+                            <option th:each="role : ${user.getRoles()}"
+                                    th:value="${role.getId()}"
+                                    th:text="${role.getName().replace('ROLE_', ' ')}">
+                            </option>
+                        </select>
                     </div>
+
 
 
                 </div>
