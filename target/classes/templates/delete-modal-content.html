@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Мой новый файл стилей -->
+    <link rel="stylesheet" href="/style.css">
+
+    <title>Delete</title>
+</head>
+<body>
+<div th:fragment="content">
+    <div class="modal fade" th:id="'deleteModal' + ${user.getId()}" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalVerticallyCenteredLabel">Delete User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- Заполнение модального окна данными пользователя -->
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="userId"><strong>ID</strong></label>
+                        <input type="text" class="form-control" id="userId"
+                               readonly
+                               th:value="${user.getId()}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="username"><strong>First Name</strong></label>
+                        <input type="text" class="form-control" id="username"
+                               readonly th:value="${user.getUsername()}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="secondname"><strong>Last Name</strong></label>
+                        <input type="text" class="form-control" id="secondname"
+                               readonly th:value="${user.getSecondname()}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age"><strong>Age</strong></label>
+                        <input type="text" class="form-control" id="age" readonly
+                               th:value="${user.getAge()}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email"><strong>Email</strong></label>
+                        <input type="text" class="form-control" id="email" readonly
+                               th:value="${user.getEmail()}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password"><strong>Password</strong></label>
+                        <input type="password" class="form-control" id="password"
+                               readonly th:value="${user.getPassword()}">
+                    </div>
+
+                    <div class="form-group role-group">
+                        <label for="roleSelect"><strong>Role</strong></label>
+
+                        <select class="form-control" id="roleSelect" multiple disabled>
+                            <option th:each="role : ${user.getRoles()}"
+                                    th:value="${role.getId()}"
+                                    th:text="${role.getName().replace('ROLE_', ' ')}">
+                            </option>
+                        </select>
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <!-- Кнопки для закрытия или удаления данных -->
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Close
+                    </button>
+                    <form th:method="post" th:action="@{/admin/delete}" class="delete-form">
+                        <input type="hidden" name="id" th:value="${user.getId()}">
+                        <button type="submit" class="btn btn-danger delete-btn">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
+</body>
+</html>

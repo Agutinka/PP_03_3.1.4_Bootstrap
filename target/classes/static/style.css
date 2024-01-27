@@ -1,0 +1,167 @@
+/* Новые стили для верхней части контейнера */
+.custom-top-bar {
+    background-color: #343a40 !important; /* Тёмно-серый цвет */
+    color: white;
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.custom-top-bar .logout-btn {
+    margin-right: 30px; /* Отступ справа */
+}
+
+/* Дополнительные стили для текста и ролей */
+.custom-top-bar span.font-weight-bold {
+    font-size: 18px;
+}
+
+.custom-top-bar span.roles {
+    font-style: italic;
+    margin-left: 10px;
+}
+
+/* Дополнительные стили для кнопки Logout */
+.custom-top-bar .logout-btn button {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/*  Стили для окна создания нового пользователя*/
+
+.form {
+    width: 100%;
+    height: 80%;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h4 {
+    margin-top: -35px;
+    text-align: left;
+}
+
+.form-container .form-group {
+    width: 30%;
+    margin-bottom: 5px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+}
+
+/* Дополнительные стили для подзаголовков */
+.form-container label {
+    text-align: center;
+}
+
+.form-container input[type="text"],
+.form-container input[type="password"],
+.form-container select {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-container #username,
+.form-container #secondname,
+.form-container #email {
+    transition: background-color 0.3s;
+}
+
+.form-container #username:focus,
+.form-container #secondname:focus,
+.form-container #email:focus,
+.form-container #username:valid,
+.form-container #secondname:valid,
+.form-container #email:valid {
+    background-color: rgba(255, 165, 0, 0.3);
+}
+
+.form-container select.form-control {
+    height: 4rem;
+}
+
+.form-container button {
+    display: block;
+    width: 50%;
+    margin: 10px auto;
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+/* Стили для окна User */
+/* Стили для заголовка таблицы */
+.table-title {
+    font-size: 24px;
+    font-weight: bold;
+    background-color: #f8f9fa; /* Светло-серый цвет */
+    color: #343a40; /* Тёмно-серый цвет текста */
+    padding: 10px;
+    margin-top: 20px;
+}
+
+/* Стили для контейнера таблицы */
+.table-container {
+    margin-right: 10vw;
+}
+
+/* Общие стили для таблицы */
+.table th, .table td {
+    text-align: center;
+}
+
+/* Убираем внутренние отступы в ячейках таблицы */
+.table th, .table td {
+    padding: 0.75rem;
+}
+
+/* Делаем ширину таблицы 100% от родительского контейнера */
+.table {
+    width: 100%;
+}
+
+
+/* Общие стили для модальных окон */
+.modal-content {
+    width: 100%; /* Ширина модального окна */
+}
+
+/* Стили для формы внутри модального окна */
+.modal-body .form-group {
+    width: 40%; /* Ширина input и select */
+    margin: 0 auto; /* Центрирование формы внутри модального окна */
+}
+
+/* Стили для input внутри формы */
+.modal-body .form-group input {
+    height: 30px; /* Фиксированная высота input */
+    margin-bottom: 5px; /* Отступ 5px снизу */
+}
+
+/* Стили для select внутри формы */
+.modal-body select.form-control {
+    height: 4rem;
+}
+
+
+
