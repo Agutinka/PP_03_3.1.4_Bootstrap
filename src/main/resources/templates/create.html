@@ -54,7 +54,7 @@
                         <select class="form-control" id="roleSelect" name="roles"
                                 multiple data-live-search="true">
                             <option th:each="roles : ${role}" th:value="${roles.getId()}"
-                                    th:text="${roles.getName().replace('ROLE_', '')}"></option>
+                                    th:text="${roles.toString()}"></option>
                         </select>
                     </div>
 

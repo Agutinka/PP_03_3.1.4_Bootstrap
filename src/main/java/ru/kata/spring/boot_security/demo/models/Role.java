@@ -1,13 +1,10 @@
 package ru.kata.spring.boot_security.demo.models;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.Set;
@@ -24,10 +21,7 @@ public class Role {
     @Column(name = "name")
     private String name;
 
-@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-        CascadeType.REFRESH, CascadeType.DETACH})
-@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "role_id"),
-        inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 
     public Role() {
@@ -65,9 +59,6 @@ public class Role {
 
     @Override
     public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return name.replace("ROLE_", " ");
     }
 }

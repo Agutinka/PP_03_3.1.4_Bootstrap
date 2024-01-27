@@ -67,7 +67,7 @@
                         <select class="form-control" id="roleSelect" multiple disabled>
                             <option th:each="role : ${user.getRoles()}"
                                     th:value="${role.getId()}"
-                                    th:text="${role.getName().replace('ROLE_', ' ')}">
+                                    th:text="${role.toString()}">
                             </option>
                         </select>
                     </div>
