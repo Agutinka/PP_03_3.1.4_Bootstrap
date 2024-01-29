@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -100,19 +101,38 @@
                                     <!-- Кнопка Edit -->
                                     <td>
                                         <!-- Ссылка для открытия модального окна редактирования -->
-                                        <button type="button" class="btn btn-primary"
-                                                th:attr="data-user-id=${user.getId()}, data-toggle='modal', data-target='#editModal' + ${user.getId()}">
+                                        <button type="button" class="btn btn-primary editUserModal"
+                                                th:data-user-id="${user.getId()}" data-toggle="modal"
+                                                data-target="#editModal">
                                             Edit
                                         </button>
+
                                         <!-- Модальное окно для редактирования-->
-                                        <div th:replace="edit-modal-content :: content"></div>
+                                        <div class="modal fade" id="editModal" tabindex="-1" role="dialog"
+                                             aria-labelledby="editModalLabel"
+                                             aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="editModalLabel">Edit User</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
 
                                     <!-- Кнопка Delete -->
                                     <td>
                                         <!-- Ссылка для открытия модального окна удаления пользователя -->
                                         <button type="button" class="btn btn-danger delete-button"
-                                                th:attr="data-user-id=${user.getId()}, data-toggle='modal', data-target='#deleteModal' + ${user.getId()}">
+                                                th:attr="data-user-id=${user.getId()}, data-toggle='modal',
+                                                data-target='#deleteModal' + ${user.getId()}">
                                             Delete
                                         </button>
                                         <!-- Модальное окно удаления -->
@@ -148,9 +168,43 @@
         });
 
         // Показываем модальное окно "Edit" при клике на кнопку Edit
-        $('[data-target^="#editModal"]').click(function () {
-            var userId = $(this).data('user-id');
-            $('#editModal' + userId).modal('show');
+        $(document).ready(function () {
+            // обработчик событий click для всех элементов editUserModal
+            $(document).on('click', '.editUserModal', function () {
+                // получаю значение атрибута data-user-id текущего элемента
+                var userId = $(this).data('user-id');
+                // получаю элемент с id editModal и выбираю его modal-body
+                var modalBody = $('#editModal .modal-body');
+
+                // отправляю AJAX-запрос на URL admin/edit с параметром id=userId
+                $.ajax({
+                    url: 'admin/edit',
+                    data: {
+                        id: userId
+                    },
+                    success: function (data) {
+                        // при успешном запросе вставляю полученные данные в modal-body модального окна
+                        modalBody.html(data);
+
+                        // добавляю обработчик событий click для кнопки с классом btn-primary внутри модального окна
+                        $('#editModal .btn-primary').off('click').on('click', function () {
+                            // получаю форму внутри modal-body модального окна
+                            var form = modalBody.find('form');
+
+                            // отправляю AJAX-запрос на URL, указанный в атрибуте action формы, с методом, указанным в атрибуте method, и данными формы
+                            $.ajax({
+                                url: form.attr('action'),
+                                method: form.attr('method'),
+                                data: form.serialize(),
+                                success: function (response) {
+                                    // при успешном запросе закрываю модальное окно
+                                    $('#editModal').modal('hide');
+                                }
+                            });
+                        });
+                    }
+                });
+            });
         });
 
         // Показываем модальное окно "Delete" при клике на кнопку Delete
